@@ -41,7 +41,35 @@ ry slightly with changes to the train-test split,
 
 
 ## Program
+import numpy as np
 
+import pandas as pd
+
+import matplotlib.pyplot as plt
+
+from statsmodels.tsa.arima.model import ARIMA
+
+from statsmodels.tsa.stattools import adfuller
+
+#(Reusing the synthetic series from previous experiment)
+
+np.random.seed(42)
+
+periods = 120
+
+time = pd.date_range(start='2015-01-01', periods=periods,
+
+freq='M')
+
+trend = np.linspace(10, 50, periods)
+
+seasonal=5* np.sin(2* np.pi* time.month/12)
+
+noise = np.random.normal(0, 2, periods)
+
+series = pd.Series(trend + seasonal + noise, index=time)
+
+# Difference once to remove trend (d=1)
 
 
 
